@@ -1,6 +1,5 @@
 var React = require('react');
-var Chartslist = require('../components/Chartslist.jsx')
-var ChartsDetail = require('../components/ChartsDetail.jsx')
+var ChartsList = require('../components/ChartsList.jsx')
 
 var ChartsContainer = React.createClass({
   getInitialState: function() {
@@ -11,20 +10,20 @@ var ChartsContainer = React.createClass({
     var request = new XMLHttpRequest();
     request.open('GET', url);
     request.onload = function() {
-      var data = JSON.parse(request.responseText);
+      var data = JSON.parse(request.responseText).feed.entry;
+      console.log(data)
       this.setState({songs: data});
     }.bind(this);
     request.send(null);
   },
-  render: function() {
-   
-       
+  render: function() { 
     return(
       <div>
         <h1>UK Top 20</h1>
+        <ChartsList songs={this.state.songs}/>
       </div>
       );
     }
 });
 
-module.exports = ChartsContainer
+module.exports = ChartsContainer;

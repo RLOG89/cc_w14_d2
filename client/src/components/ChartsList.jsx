@@ -1,14 +1,14 @@
 var React = require('react');
+var ChartsDetail = require('./ChartsDetail');
 
 var ChartsList = React.createClass({
+  getInitialState: function() {
+    return({selectedIndex: undefined});
+  },
   render: function() {
-    var chartNodes = this.props.data.map(function(song, index) {
-      return( <Song
-        key={index}
-        position={song['im:index']['label']}
-        title={song['im:name']['label']}
-        artist={song['im:artist']['label']}
-        />
+    console.log(this.props.songs)
+    var chartNodes = this.props.songs.map(function(song, index) {
+      return( <ChartsDetail key={index} position={index+1} title={song['im:name']['label']} artist={song['im:artist']['label']} ></ChartsDetail>
         )
     });
    
